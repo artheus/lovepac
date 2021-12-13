@@ -147,3 +147,15 @@ func testAssetStreamerReportsNilContext(t *testing.T, assetStream packer.AssetSt
 		t.Errorf("Expected 'context nil' error but got nil")
 	}
 }
+
+
+func TestFileGlobStream(t *testing.T) {
+	expect := map[string]struct{}{
+		"button_active.png": {},
+		"button_hover.png":  {},
+		"button.png":        {},
+	}
+
+	assetStreamer := packer.NewFileGlobStream("./fixtures/button*.png")
+	testAssetStreamer(t, assetStreamer, expect)
+}
